@@ -9,6 +9,12 @@ config/
 .env
 *.secret
 
+# プライベートアセット (別リポジトリで管理)
+# 本番用イラスト・背景・音楽・シナリオテキストは公開しない
+assets/images/
+assets/audio/
+content/
+
 # OS
 .DS_Store
 Thumbs.db
