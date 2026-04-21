@@ -10,13 +10,13 @@ Work on phases in order. Do not move to the next phase until the done condition 
 **Goal:** Ready to write code.
 
 ### Tasks
-- [ ] Install Godot 4 (GDScript, standard version — not .NET)
-- [ ] Create a new Godot project
-- [ ] Set up folder structure (see below)
-- [ ] Install GUT (Godot Unit Test) plugin
-- [ ] Create GitHub repository (private first — go public in Phase 0.5)
-- [ ] Add `.gitignore` for Godot
-- [ ] First commit and push
+- [x] Install Godot 4 (GDScript, standard version — not .NET)
+- [x] Create a new Godot project
+- [x] Set up folder structure (see below)
+- [x] Install GUT (Godot Unit Test) plugin
+- [x] Create GitHub repository (private first — go public in Phase 0.5)
+- [x] Add `.gitignore` for Godot
+- [x] First commit and push
 
 ### Folder Structure
 ```

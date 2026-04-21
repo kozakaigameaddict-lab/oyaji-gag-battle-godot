@@ -84,6 +84,27 @@ Add a new entry to `.gitignore` when:
 
 ---
 
+## Special Case: Private Assets
+
+Some assets must not be public — scenario text, designer art, and music.
+These are managed in a **separate private repository** (`oyaji-gag-battle-assets`).
+
+The folders are gitignored in this public repo:
+```
+assets/images/    ← designer art and backgrounds
+assets/audio/     ← music and SFX
+content/          ← scenario text data
+```
+
+**Workflow:**
+1. Clone the private assets repo separately.
+2. Copy the files into your local project folder.
+3. They will not appear in SourceTree (gitignored) and will never be committed here.
+
+Use `assets/images/placeholder/` for placeholder art during development — this subfolder is NOT ignored and can be committed safely.
+
+---
+
 ## Special Case: config/ folder
 
 We use `config/` for local secrets (proxy server URL, etc.).
