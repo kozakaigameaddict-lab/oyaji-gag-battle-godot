@@ -1,0 +1,14 @@
+# Godot キャッシュ・生成ファイル
+# (Unityの Library/ フォルダと同じ概念)
+.godot/
+*.translation
+export_presets.cfg
+
+# ローカル設定・シークレット
+config/
+.env
+*.secret
+
+# OS
+.DS_Store
+Thumbs.db
