@@ -12,6 +12,20 @@
 - Keep responses concise.
 - Teach Godot step-by-step from installation onward.
 
+## Coding Session Flow (per script)
+1. Claude explains the basic information (purpose, structure, what methods are needed)
+2. User writes a draft
+3. Claude reviews and gives feedback
+4. User updates — repeat until clean
+5. Claude enriches: adds comments, refactoring only — NO new features
+6. User checks the final script and asks questions if any
+
+## Enrichment Rule
+When Claude enriches a script, only the following are allowed:
+- Adding or improving Japanese comments
+- Refactoring (renaming, splitting, formatting)
+- New features must be written by the user, not Claude
+
 ## Known Vocabulary (user's shorthand)
 | Shorthand | English |
 |---|---|
