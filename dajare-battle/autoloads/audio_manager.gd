@@ -12,7 +12,8 @@ extends Node
 ##   BGM再生: AudioManager.play_bgm("battle_bgm.ogg")
 ##   BGM停止: AudioManager.stop_bgm()
 ##   SFX再生: AudioManager.play_sfx("door_open.ogg")
-class_name AudioManager
+##
+## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
 # オーディオファイルのベースパス
 const _AUDIO_BASE_PATH: String = "res://assets/audio/"

@@ -8,7 +8,8 @@ extends Node
 ##
 ## 使い方:
 ##   SceneManager.change_scene("title/title_scene")
-class_name SceneManager
+##
+## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
 # シーンファイルのベースパス
 const _SCENE_BASE_PATH: String = "res://scenes/"

@@ -10,7 +10,8 @@ extends Node
 ##   登録: ServiceLocator.register("judge_service", ClaudeJudgeService.new())
 ##   取得: var judge = ServiceLocator.get_service("judge_service")
 ##   削除: ServiceLocator.unregister("judge_service")
-class_name ServiceLocator
+##
+## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
 # 登録されたサービスを保持する辞書 (key: String, value: Object)
 var _services: Dictionary = {}

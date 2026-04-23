@@ -23,7 +23,7 @@ class_name JudgeServiceBase
 ## だじゃれを判定してスコアを返す。
 ## このクラスでは空のデフォルト値を返す。
 ## 具象クラスでオーバーライドして実際のAI判定を実装すること。
-func judge(topic: String, player_dajare: String, enemy_dajare: String) -> Dictionary:
+func judge(_topic: String, _player_dajare: String, _enemy_dajare: String) -> Dictionary:
 	return {
 		"player_score": 0,
 		"enemy_score": 0,

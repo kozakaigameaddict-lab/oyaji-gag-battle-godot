@@ -11,7 +11,8 @@ extends Node
 ##   ロード:              SaveManager.load_data()  ← _ready()で自動実行
 ##   アンロック確認:      SaveManager.is_chapter_unlocked(1)
 ##   チャプター解禁:      SaveManager.unlock_chapter(2)
-class_name SaveManager
+##
+## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
 # セーブデータの暗号化パスワード（本番環境ではconfigファイルから読み込む予定）
 const _SAVE_PASSWORD: String = "placeholder"
