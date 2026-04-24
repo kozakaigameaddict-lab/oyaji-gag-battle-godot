@@ -98,14 +98,14 @@ Cost for indie scale: nearly free.
 **Goal:** Core systems in place before any game content.
 
 ### Tasks
-- [ ] Implement `ServiceLocator` autoload
-- [ ] Implement `SceneManager` autoload (change scenes with transition)
-- [ ] Implement `AudioManager` autoload (stub — play/stop BGM, SFX)
-- [ ] Implement `SaveManager` autoload (stub — save/load chapter unlock state, encrypted)
-- [ ] Write base class `JudgeServiceBase` in domain/services/
-- [ ] Write a `MockJudgeService` that returns a random score (for testing without API)
-- [ ] Register `MockJudgeService` in `ServiceLocator`
-- [ ] Write first GUT test: confirm `ServiceLocator` registers and retrieves a service
+- [x] Implement `ServiceLocator` autoload
+- [x] Implement `SceneManager` autoload (change scenes with transition)
+- [x] Implement `AudioManager` autoload (stub — play/stop BGM, SFX)
+- [x] Implement `SaveManager` autoload (stub — save/load chapter unlock state, encrypted)
+- [x] Write base class `JudgeServiceBase` in domain/services/
+- [x] Write a `MockJudgeService` that returns a random score (for testing without API)
+- [x] Register `MockJudgeService` in `ServiceLocator` via `GameInitializer`
+- [x] Write first GUT test: confirm `ServiceLocator` registers and retrieves a service (4/4 passed)
 
 ### Why this first?
 These systems are used by every scene. Building them first means you never have to rewrite later.
