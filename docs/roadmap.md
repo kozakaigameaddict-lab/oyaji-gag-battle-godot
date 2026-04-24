@@ -77,14 +77,19 @@ Cost for indie scale: nearly free.
 > This will be implemented in Phase 3. For now, just understand the concept.
 
 ### Tasks
-- [ ] Read through [github-checklist.md](github-checklist.md) completely
-- [ ] Confirm `.gitignore` covers all secret files
-- [ ] Add a `config/` folder to `.gitignore` (this is where API keys will go locally)
-- [ ] Add a `config/config.example.cfg` file — a template with placeholder values (safe to commit)
-- [ ] Verify git history has no secrets: `git log --all --full-history`
-- [ ] Make the repository public on GitHub
+- [x] Read through [github-checklist.md](github-checklist.md) completely
+- [x] Confirm `.gitignore` covers all secret files
+- [x] Add a `config/` folder to `.gitignore`
+- [x] Add `config.example.cfg` — template with placeholder values
+- [x] Verify git history has no secrets
+- [x] Make the repository public on GitHub
+- [x] Branch rulesets configured (main + develop)
+- [x] Merge strategy: squash only, auto-delete head branches
+- [x] Secret scanning and push protection enabled
+- [x] Private assets strategy decided (separate private repo)
+- [x] `.claude/` added to `.gitignore`
 
-**Done condition:** Repository is public. `config/` is git-ignored. No secrets in history.
+**Done condition:** Repository is public. `config/` is git-ignored. No secrets in history. ✓
 
 ---
 

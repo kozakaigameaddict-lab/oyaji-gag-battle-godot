@@ -110,6 +110,20 @@ GDScript follows the [official GDScript style guide](https://docs.godotengine.or
 
 ---
 
+## Debug Logging
+
+Never use `print()` directly. Always use the `DebugLogger` static class (`shared/components/logger.gd`).
+
+| Method | Output in Debug | Output in Release |
+|---|---|---|
+| `DebugLogger.debug(msg)` | Yes | No |
+| `DebugLogger.warn(msg)` | Yes (yellow) | No |
+| `DebugLogger.error(msg)` | Yes (red) | Yes (always) |
+
+`OS.is_debug_build()` returns `true` in the editor and debug exports, `false` in release exports.
+
+---
+
 ## Comments
 
 - **All comments must be written in Japanese.**

@@ -14,6 +14,14 @@ config/name="DajareBattle"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ServiceLocator="*uid://dh40ubxrl705y"
+SceneManager="*uid://cur1ui5pyekjf"
+AudioManager="*uid://j1r4108vuiua"
+SaveManager="*uid://ure8ryouoc46"
+GameInitializer="*uid://cyngiyn7it6cc"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
