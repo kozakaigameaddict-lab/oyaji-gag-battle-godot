@@ -13,18 +13,22 @@ extends Node
 ##
 ## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
+# --- プライベート変数 ---
+
 # 登録されたサービスを保持する辞書 (key: String, value: Object)
 var _services: Dictionary = {}
 
+
+# --- パブリックメソッド ---
 
 ## サービスを登録する。
 ## すでに同じキーで登録済みの場合は警告を出して何もしない。
 func register(key: String, service: Object) -> void:
 	if _services.has(key):
-		push_warning("[ServiceLocator] すでに登録済みのキーです: %s" % key)
+		DebugLogger.error("すでに登録済みのキーです: %s" % key)
 		return
 	_services[key] = service
-	DebugLogger.debug("[ServiceLocator] サービスを登録しました: %s" % key)
+	DebugLogger.debug("サービスを登録しました: %s" % key)
 
 
 ## サービスを取得する。
@@ -32,7 +36,7 @@ func register(key: String, service: Object) -> void:
 func get_service(key: String) -> Object:
 	if _services.has(key):
 		return _services[key]
-	push_warning("[ServiceLocator] 存在しないキーです: %s" % key)
+	DebugLogger.error("存在しないキーです: %s" % key)
 	return null
 
 
@@ -40,10 +44,10 @@ func get_service(key: String) -> Object:
 ## キーが存在しない場合は警告を出す。
 func unregister(key: String) -> void:
 	if not _services.has(key):
-		push_warning("[ServiceLocator] 登録されていないキーです: %s" % key)
+		DebugLogger.error("登録されていないキーです: %s" % key)
 		return
 	_services.erase(key)
-	DebugLogger.debug("[ServiceLocator] サービスを削除しました: %s" % key)
+	DebugLogger.debug("サービスを削除しました: %s" % key)
 
 
 ## 指定したキーのサービスが登録済みかどうかを返す。

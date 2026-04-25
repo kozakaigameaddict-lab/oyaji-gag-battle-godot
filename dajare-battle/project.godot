@@ -16,6 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+DebugLogger="*uid://cdffndu41fo7n"
 ServiceLocator="*uid://dh40ubxrl705y"
 SceneManager="*uid://cur1ui5pyekjf"
 AudioManager="*uid://j1r4108vuiua"

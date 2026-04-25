@@ -14,6 +14,8 @@ extends Node
 ##
 ## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
+# --- 定数 ---
+
 # セーブデータの暗号化パスワード（本番環境ではconfigファイルから読み込む予定）
 const _SAVE_PASSWORD: String = "placeholder"
 
@@ -23,41 +25,48 @@ const _SAVE_DATA_PATH: String = "user://save.dat"
 # セーブデータのキー定数（辞書のキー名をハードコードしないための定数）
 const _UNLOCKED_CHAPTERS: String = "unlocked_chapters"
 
+
+# --- プライベート変数 ---
+
 # メモリ上のセーブデータ。load_data()で読み込まれる。
 var _save_data: Dictionary = {
 	_UNLOCKED_CHAPTERS: [1]
 }
 
 
+# --- ライフサイクル ---
+
 ## 起動時にセーブデータを自動ロードする。
 func _ready() -> void:
 	load_data()
 
 
+# --- パブリックメソッド ---
+
 ## 現在の_save_dataを暗号化ファイルに書き込む。
 func save_data() -> void:
 	var file = FileAccess.open_encrypted_with_pass(_SAVE_DATA_PATH, FileAccess.WRITE, _SAVE_PASSWORD)
 	if file == null:
-		DebugLogger.error("[SaveManager] セーブファイルを開けませんでした: %s" % _SAVE_DATA_PATH)
+		DebugLogger.error("セーブファイルを開けませんでした: %s" % _SAVE_DATA_PATH)
 		return
 	file.store_string(JSON.stringify(_save_data))
 	file.close()
-	DebugLogger.debug("[SaveManager] セーブしました")
+	DebugLogger.debug("セーブしました")
 
 
 ## 暗号化ファイルからセーブデータを読み込む。
 ## ファイルが存在しない場合（初回プレイ）はデフォルト値をそのまま使用する。
 func load_data() -> void:
 	if not FileAccess.file_exists(_SAVE_DATA_PATH):
-		DebugLogger.debug("[SaveManager] セーブデータが見つかりません。初期値を使用します。")
+		DebugLogger.debug("セーブデータが見つかりません。初期値を使用します。")
 		return
 	var file = FileAccess.open_encrypted_with_pass(_SAVE_DATA_PATH, FileAccess.READ, _SAVE_PASSWORD)
 	if file == null:
-		DebugLogger.error("[SaveManager] セーブファイルを開けませんでした: %s" % _SAVE_DATA_PATH)
+		DebugLogger.error("セーブファイルを開けませんでした: %s" % _SAVE_DATA_PATH)
 		return
 	_save_data = JSON.parse_string(file.get_as_text())
 	file.close()
-	DebugLogger.debug("[SaveManager] ロードしました")
+	DebugLogger.debug("ロードしました")
 
 
 ## 指定したチャプターが解禁済みかどうかを返す。
