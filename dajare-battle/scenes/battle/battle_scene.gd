@@ -41,6 +41,7 @@ var _player_dajare: String = ""
 var _enemy_dajare: String = ""
 var _player_score: int = 0
 var _enemy_score: int = 0
+var _winner: String = ""
 var _topic: String = "テスト"
 
 
@@ -59,11 +60,13 @@ func _ready() -> void:
 # --- パブリックメソッド ---
 
 ## ラウンド間のリセット処理。次のラウンド開始前に呼び出す。
+## データの初期化のみに使用すること
 func initialize() -> void:
-	_topic_label.text = _topic
-	_dajare_input.text = ""
-	_dajare_input.grab_focus()
-	_timer.start(30.0)
+	_current_round += 1
+	_player_dajare = ""
+	_enemy_dajare = ""
+	_player_score = 0
+	_enemy_score = 0
 
 
 # --- プライベートメソッド ---
@@ -95,6 +98,10 @@ func _enter_talk() -> void:
 func _enter_main() -> void:
 	DebugLogger.debug("MAINへ入場した", DebugCategories.Category.BATTLE_MAIN)
 	initialize()
+	_topic_label.text = _topic
+	_dajare_input.text = ""
+	_dajare_input.grab_focus()
+	_timer.start(30.0)
 
 
 ## PLAYER_PRESENTATIONステートの開始処理。
@@ -152,4 +159,24 @@ func _on_next_pressed() -> void:
 		BattleState.JUDGE:
 			_change_state(BattleState.FRIEND_COMMENT)			
 		BattleState.FRIEND_COMMENT:
-			_change_state(BattleState.MAIN)
+			if _resolve_round():
+				DebugLogger.debug(
+					"バトル終了: 勝者[%s], プレイヤー勝ち点[%s], エネミー勝ち点[%s], " % [_winner, _player_win_count, _enemy_win_count], 
+					DebugCategories.Category.BATTLE_FRIEND_COMMENT)
+			else:
+				_change_state(BattleState.TALK)
+
+
+## 勝敗の判定を行う
+func _resolve_round() -> bool:
+	if _player_score >= _enemy_score:
+		_player_win_count += 1
+	else: 
+		_enemy_win_count += 1
+	if _player_win_count >= GameConstants.WINS_REQUIRED:
+		_winner = "プレイヤー"
+		return true
+	elif _enemy_win_count >= GameConstants.WINS_REQUIRED:
+		_winner = "エネミー"
+		return true
+	return false

@@ -24,12 +24,12 @@ Title Scene
             └─ Battle Scene
                  ├─ Talk Scene (pre-battle dialogue)
                  ├─ [Loop: up to 5 rounds]
-                 │    ├─ 1. Talk Scene
+                 │    ├─ 1. Talk Scene       ← dialogue before each round
                  │    ├─ 2. Main Scene       ← player inputs dajare
                  │    ├─ 3. Player Presentation Scene ← player's dajare revealed
                  │    ├─ 4. Enemy Presentation Scene  ← enemy's dajare revealed
                  │    ├─ 5. Judge Scene      ← AI scores both sides
-                 │    └─ 6. Friend Comment Scene ← advice for higher score
+                 │    └─ 6. Friend Comment Scene ← advice for improving score
                  │
                  ├─ [Player wins 3 rounds]
                  │    └─ Epilogue Story Scene
