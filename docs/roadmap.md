@@ -127,18 +127,18 @@ Use this for save data. The passphrase should be stored in the local config (git
 **Goal:** The core battle loop works end-to-end with placeholder art.
 
 ### Tasks
-- [ ] Build `BattleScene` with all 5 sub-states as a state machine
-  - State: TALK → MAIN → PRESENTATION → JUDGE → FRIEND_COMMENT → (loop or end)
-- [ ] MAIN state: topic label, text input, submit button, timer
-- [ ] PRESENTATION state: show player's dajare in a speech bubble
-- [ ] JUDGE state: call `JudgeServiceBase`, show scores, flag sprites
-- [ ] FRIEND_COMMENT state: show advice text
-- [ ] 3-round logic (best of 2 wins)
-- [ ] Win / lose detection → trigger next scene
+- [x] Build `BattleScene` with all 6 sub-states as a state machine
+  - State: TALK → MAIN → PLAYER_PRESENTATION → ENEMY_PRESENTATION → JUDGE → FRIEND_COMMENT → (loop)
+- [x] MAIN state: topic label, text input, submit button, timer
+- [x] PRESENTATION state: show player's and enemy's dajare as labels
+- [x] JUDGE state: call `JudgeServiceBase` via `ServiceLocator`, show scores
+- [x] FRIEND_COMMENT state: stub (content added in Phase 6)
+- [x] 5-round logic (best of 3 wins) — updated from original spec
+- [x] Win / lose detection — logs result; scene transition deferred to Phase 5
 
 Use placeholder colored rectangles for characters. No real art yet.
 
-**Done condition:** You can play 3 full rounds against a mock CPU and reach a win or lose result.
+**Done condition:** You can play up to 5 rounds against a mock CPU and the winner is correctly detected. ✓
 
 ---
 

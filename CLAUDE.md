@@ -26,6 +26,11 @@ When Claude enriches a script, only the following are allowed:
 - Refactoring (renaming, splitting, formatting)
 - New features must be written by the user, not Claude
 
+## New Script / New Feature Rule
+- Claude must NEVER create a new script or add new functionality to an existing script directly.
+- When a new script or feature is needed, Claude explains what to do and the user writes it.
+- This applies even during architecture setup, doc updates, or enrichment phases.
+
 ## Known Vocabulary (user's shorthand)
 | Shorthand | English |
 |---|---|

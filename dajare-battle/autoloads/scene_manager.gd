@@ -11,10 +11,14 @@ extends Node
 ##
 ## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
+# --- 定数 ---
+
 # シーンファイルのベースパス
 const _SCENE_BASE_PATH: String = "res://scenes/"
 const _SCENE_EXTENSION: String = ".tscn"
 
+
+# --- パブリックメソッド ---
 
 ## シーンを切り替える。
 ## pathが空、またはファイルが存在しない場合はエラーを出して処理を中断する。
@@ -23,6 +27,6 @@ const _SCENE_EXTENSION: String = ".tscn"
 func change_scene(path: String) -> void:
 	var full_path: String = _SCENE_BASE_PATH + path + _SCENE_EXTENSION
 	if path.is_empty() or not ResourceLoader.exists(full_path):
-		DebugLogger.error("[SceneManager] 無効なシーンパスです: %s" % full_path)
+		DebugLogger.error("無効なシーンパスです: %s" % full_path)
 		return
 	get_tree().change_scene_to_file(full_path)

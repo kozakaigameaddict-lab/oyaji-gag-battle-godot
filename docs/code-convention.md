@@ -112,24 +112,119 @@ GDScript follows the [official GDScript style guide](https://docs.godotengine.or
 
 ## Debug Logging
 
-Never use `print()` directly. Always use the `DebugLogger` static class (`shared/components/logger.gd`).
+Never use `print()` directly. Always use the `DebugLogger` static class (`shared/components/debug_logger.gd`).
+
+All methods require a **category** as the first argument — use the script name in brackets:
+
+```gdscript
+DebugLogger.debug("[BattleScene]", "TALKステートに遷移")
+DebugLogger.warn("[SaveManager]", "ファイルが見つかりません")
+DebugLogger.error("[SceneManager]", "無効なパスです")
+```
 
 | Method | Output in Debug | Output in Release |
 |---|---|---|
-| `DebugLogger.debug(msg)` | Yes | No |
-| `DebugLogger.warn(msg)` | Yes (yellow) | No |
-| `DebugLogger.error(msg)` | Yes (red) | Yes (always) |
+| `DebugLogger.debug(cat, msg)` | Yes (unless muted) | No |
+| `DebugLogger.warn(cat, msg)` | Yes (unless muted) | No |
+| `DebugLogger.error(cat, msg)` | Yes (red) | Yes (always) |
+
+To silence a noisy script during development:
+```gdscript
+DebugLogger.mute("[BattleScene]")    # 非表示
+DebugLogger.unmute("[BattleScene]")  # 再表示
+```
 
 `OS.is_debug_build()` returns `true` in the editor and debug exports, `false` in release exports.
+
+---
+
+## Script Size Limit
+
+- **Soft limit: 300 lines per script.**
+- If a script exceeds 300 lines, consider splitting it into smaller focused scripts.
+- Hard limit: 500 lines. A script over 500 lines must be split.
+
+---
+
+## Constants
+
+Never define game-wide constants inside individual scripts.
+All shared constants go in `shared/components/game_constants.gd`:
+
+```gdscript
+# OK
+GameConstants.MAX_ROUNDS
+
+# NG
+const MAX_ROUNDS: int = 3  # battle_scene.gd の中に書いてはいけない
+```
+
+---
+
+## Internal Script Structure
+
+Every `.gd` file must follow this section order:
+
+```gdscript
+extends ...
+class_name ...      # 以下の場合に付ける:
+                    #   - Domain / shared クラス
+                    #   - 他のスクリプトから型付き参照される シーンルートノード
+                    # Autoload には付けない → ※ AutoloadにはGodotの制約によりclass_nameを付けない。
+
+## クラスの説明（長さ制限なし）
+
+# --- 定数 ---
+const ...
+
+# --- 列挙型 ---
+enum ...
+
+# --- シグナル ---
+signal ...
+
+# --- エクスポート変数 ---
+@export var ...
+
+# --- ノード参照 ---
+@onready var ...
+
+# --- プライベート変数 ---
+var _...
+
+# --- ライフサイクル ---
+func _ready() -> void: ...
+func _process(_delta: float) -> void: ...
+
+# --- パブリックメソッド ---
+func some_method() -> void: ...
+
+# --- プライベートメソッド ---
+func _helper() -> void: ...
+```
+
+**Rules:**
+- Omit a section entirely if the script has nothing for it. Do not leave empty section headers.
+- Section headers use `# ---` style separators.
 
 ---
 
 ## Comments
 
 - **All comments must be written in Japanese.**
-- Every class, method, and non-obvious logic block must have a Japanese comment.
-- Goal: the planner must be able to read and understand the code flow.
+- Goal: a planner (non-programmer) must be able to read and understand the code flow.
 - Use `##` for doc comments (shown in the Godot editor tooltip). Use `#` for inline comments.
+
+| Target | Style | Required? |
+|---|---|---|
+| Class | `##` above `extends` / `class_name` | Always |
+| Public method | `##` above `func` | Always |
+| Private method | `##` above `func` | If not obvious |
+| Exported variable | `##` above `@export` | Always |
+| Private variable | `#` inline | If not obvious |
+| Line inside a function | `#` before the line | If a planner would find it confusing |
+
+**Rule:** Never use `##` inside a function body — `##` is only for declarations.
 
 ```gdscript
 ## バトルの1ラウンドを管理するプレゼンター。
@@ -139,6 +234,11 @@ extends Node
 
 # 現在のラウンド数 (1〜3)
 var _current_round: int = 0
+
+## ラウンドをリセットして最初から開始する。
+func reset() -> void:
+    # カウンターをゼロに戻す
+    _current_round = 0
 ```
 
 ---

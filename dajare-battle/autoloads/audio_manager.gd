@@ -15,14 +15,21 @@ extends Node
 ##
 ## ※ AutoloadにはGodotの制約によりclass_nameを付けない。
 
+# --- 定数 ---
+
 # オーディオファイルのベースパス
 const _AUDIO_BASE_PATH: String = "res://assets/audio/"
+
+
+# --- プライベート変数 ---
 
 # BGM再生用プレイヤー
 var _bgm_player: AudioStreamPlayer
 # SFX再生用プレイヤー (ワンショット再生)
 var _sfx_player: AudioStreamPlayer
 
+
+# --- ライフサイクル ---
 
 ## 初期化: BGM・SFX用のAudioStreamPlayerをそれぞれ生成してシーンツリーに追加する
 func _ready() -> void:
@@ -32,13 +39,15 @@ func _ready() -> void:
 	add_child(_sfx_player)
 
 
+# --- パブリックメソッド ---
+
 ## BGMを読み込んで再生する。
 ## pathはres://assets/audio/からの相対パス・拡張子込みで渡す。
 ## 例: "battle_bgm.ogg"
 func play_bgm(path: String) -> void:
 	var full_path: String = _AUDIO_BASE_PATH + path
 	if path.is_empty() or not ResourceLoader.exists(full_path):
-		DebugLogger.error("[AudioManager] 無効なBGMパスです: %s" % full_path)
+		DebugLogger.error("無効なBGMパスです: %s" % full_path)
 		return
 	_bgm_player.stream = load(full_path)
 	# TODO: Phase 7 でループ設定を実装する (フォーマットにより設定方法が異なる)
@@ -57,7 +66,7 @@ func stop_bgm() -> void:
 func play_sfx(path: String) -> void:
 	var full_path: String = _AUDIO_BASE_PATH + path
 	if path.is_empty() or not ResourceLoader.exists(full_path):
-		DebugLogger.error("[AudioManager] 無効なSFXパスです: %s" % full_path)
+		DebugLogger.error("無効なSFXパスです: %s" % full_path)
 		return
 	_sfx_player.stream = load(full_path)
 	_sfx_player.play()
