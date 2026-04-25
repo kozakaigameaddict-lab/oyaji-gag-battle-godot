@@ -10,9 +10,11 @@ class_name DebugCategories
 # ログカテゴリ。スクリプトの役割単位で分類する。
 enum Category {
 	NONE,
+	BATTLE_TALK,
 	BATTLE_MAIN,
 	BATTLE_PRESENTATION,
 	BATTLE_JUDGE,
+	BATTLE_FRIEND_COMMENT,
 	SAVE,
 	SCENE_MANAGER,
 	AUDIO,

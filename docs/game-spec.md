@@ -23,7 +23,7 @@ Title Scene
        └─ Story Scene (introduction)
             └─ Battle Scene
                  ├─ Talk Scene (pre-battle dialogue)
-                 ├─ [Loop: up to 3 rounds]
+                 ├─ [Loop: up to 5 rounds]
                  │    ├─ 1. Talk Scene
                  │    ├─ 2. Main Scene       ← player inputs dajare
                  │    ├─ 3. Player Presentation Scene ← player's dajare revealed
@@ -31,11 +31,11 @@ Title Scene
                  │    ├─ 5. Judge Scene      ← AI scores both sides
                  │    └─ 6. Friend Comment Scene ← advice for higher score
                  │
-                 ├─ [Player wins 2 rounds]
+                 ├─ [Player wins 3 rounds]
                  │    └─ Epilogue Story Scene
                  │         └─ Title Scene (next chapter unlocked)
                  │
-                 └─ [Enemy wins 2 rounds]
+                 └─ [Enemy wins 3 rounds]
                       └─ Game Over Screen
                            ├─ Retry → back to Talk Scene (same chapter)
                            └─ Return → Title Scene
@@ -88,11 +88,11 @@ The battle scene has six sub-states per round:
 - Background
 
 #### 5. Judge Scene
-- Flag sprites:
+- 3 judge characters each raise a flag to vote for the winner
   - White flag = Player
   - Red flag = Enemy
 - Score/result presentation animation
-- Result label
+- Result label (who won the round)
 
 #### 6. Friend Comment Scene
 - Friend character image
@@ -115,10 +115,18 @@ Opens config panel containing:
 
 ## Battle Rules
 
-- 3 rounds per battle (maximum)
-- Win condition: first to win **2 rounds** wins the battle
-- Lose condition: enemy wins 2 rounds → player loses
+- Maximum **5 rounds** per battle
+- Win condition: first to win **3 rounds** wins the battle
+- Lose condition: enemy wins 3 rounds → player loses
 - Topic per round: a **single word** — player must make a dajare related to that word
+- No draws: if scores are equal, **player wins** the round
+
+## Judge System
+
+- **3 judges** evaluate each round and vote for the winner
+- The side that receives the majority vote wins the round
+- Internally, if the AI score is equal for both sides, the player wins
+- The judge selection system (which 3 judges appear) will be implemented in a later phase
 
 ---
 
@@ -146,3 +154,5 @@ Opens config panel containing:
 - Scoring criteria for dajare: TBD
 - Game Over screen: **Retry** (back to Talk Scene) or **Return** (Title Scene) — decided.
 - Number of chapters at launch: **3**
+- Round win tie-breaker: equal score → **player wins** — decided.
+- Battle format: best of 5 (first to 3 wins) — decided.

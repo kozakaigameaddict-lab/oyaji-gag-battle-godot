@@ -6,6 +6,6 @@ class_name GameConstants
 
 # --- バトル ---
 ## 1バトルの最大ラウンド数
-const MAX_ROUNDS: int = 3
+const MAX_ROUNDS: int = 5
 ## 勝利に必要なラウンド勝利数
-const WINS_REQUIRED: int = 2
+const WINS_REQUIRED: int = 3

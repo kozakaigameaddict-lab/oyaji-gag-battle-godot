@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="DajareBattle"
+run/main_scene="uid://eh7wrdej2bxr"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +23,11 @@ SceneManager="*uid://cur1ui5pyekjf"
 AudioManager="*uid://j1r4108vuiua"
 SaveManager="*uid://ure8ryouoc46"
 GameInitializer="*uid://cyngiyn7it6cc"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [editor_plugins]
 
