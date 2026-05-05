@@ -21,3 +21,9 @@ content/
 # OS
 .DS_Store
 Thumbs.db
+
+# llama.cpp server
+llama-b9012-bin-win-vulkan-x64/
+llama-server.exe
+*.dll
+models/
