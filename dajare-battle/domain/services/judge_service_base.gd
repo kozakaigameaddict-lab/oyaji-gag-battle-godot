@@ -24,6 +24,7 @@ class_name JudgeServiceBase
 ## このクラスでは空のデフォルト値を返す。
 ## 具象クラスでオーバーライドして実際のAI判定を実装すること。
 func judge(_topic: String, _player_dajare: String, _enemy_dajare: String) -> Dictionary:
+	await Engine.get_main_loop().process_frame
 	return {
 		"player_score": 0,
 		"enemy_score": 0,

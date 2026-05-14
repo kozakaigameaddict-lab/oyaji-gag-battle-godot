@@ -14,5 +14,8 @@ extends Node
 
 ## 起動時にすべてのサービスをServiceLocatorへ登録する。
 func _ready() -> void:
+	# HTTPRequestノードを作り、サービスに渡す
+	var http_node = HTTPRequest.new()
+	add_child(http_node)
 	# AIジャッジサービス: 開発中はモックを使用。Phase 3でAPIサービスに切り替える。
-	ServiceLocator.register("judge_service", MockJudgeService.new())
+	ServiceLocator.register("judge_service", GeminiJudgeService.new(http_node))

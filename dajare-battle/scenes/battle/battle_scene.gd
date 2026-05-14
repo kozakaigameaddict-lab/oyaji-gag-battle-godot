@@ -124,10 +124,10 @@ func _enter_judge() -> void:
 	if judge_service == null:
 		DebugLogger.error("judge_serviceが登録されていません", DebugCategories.Category.BATTLE_JUDGE)
 		return
-	var result: Dictionary = judge_service.judge(_topic, _player_dajare, _enemy_dajare)
-	_player_score = result["player_score"]
+	var result: Dictionary = await judge_service.judge(_topic, _player_dajare, _enemy_dajare)
+	_player_score = int(result["player_score"])
 	_player_score_label.text = str(_player_score)
-	_enemy_score = result["enemy_score"]
+	_enemy_score = int(result["enemy_score"])
 	_enemy_score_label.text = str(_enemy_score)
 	DebugLogger.debug("結果: %s" % str(result), DebugCategories.Category.BATTLE_JUDGE)
 	
