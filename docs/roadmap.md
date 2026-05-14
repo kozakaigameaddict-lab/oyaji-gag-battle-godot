@@ -147,20 +147,20 @@ Use placeholder colored rectangles for characters. No real art yet.
 **Goal:** Replace mock judge with a real AI API, via a proxy server.
 
 ### Tasks
-- [ ] Study Godot `HTTPRequest` node and `await` on signals
-- [ ] Build a simple proxy server (Cloudflare Workers recommended — free tier is enough)
+- [x] Study Godot `HTTPRequest` node and `await` on signals
+- [x] Build a simple proxy server (Cloudflare Workers)
   - Receives: topic, player dajare, enemy dajare
-  - Calls AI API with your key (stored on the server, never in the game)
+  - Calls Gemini API with key stored on server, never in the game
   - Returns: scores as JSON
-- [ ] Implement `ClaudeJudgeService` in infrastructure/judge/
-- [ ] Implement `OpenAiJudgeService`
-- [ ] Implement `GeminiJudgeService`
-- [ ] Design the scoring prompt: topic + both dajare → scores + reason
-- [ ] Test each API and compare quality and cost
-- [ ] Choose one as default (swappable via `ServiceLocator`)
-- [ ] Proxy server URL stored in git-ignored config file
+- [x] Implement `GeminiJudgeService` in infrastructure/judge/
+- [x] Design the scoring prompt: topic + both dajare → scores + reason
+- [x] Proxy server URL stored in git-ignored config file
+- [x] Gemini chosen as default — swappable via `ServiceLocator`
+- [ ] Implement `ClaudeJudgeService` — deferred (requires paid API key)
+- [ ] Implement `OpenAiJudgeService` — deferred (requires paid API key)
+- [ ] Compare API quality and cost — deferred to when budget allows
 
-**Done condition:** A real AI scores your dajare through the proxy server, with no API key in the game files.
+**Done condition:** A real AI scores your dajare through the proxy server, with no API key in the game files. ✓
 
 ---
 
