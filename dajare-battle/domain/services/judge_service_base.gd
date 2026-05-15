@@ -9,13 +9,16 @@ extends RefCounted
 ##
 ## 使い方:
 ##   var judge: JudgeServiceBase = ServiceLocator.get_service("judge_service")
-##   var result: Dictionary = judge.judge(topic, player_dajare, enemy_dajare)
+##   var result: Dictionary = judge.judge(topic, dajare)
 ##
 ## 戻り値のDictionary構造:
 ##   {
-##       "player_score": int,   # プレイヤーのスコア
-##       "enemy_score":  int,   # 敵のスコア
-##       "reason":       String # 判定理由
+##       "pun_score":       int,    # ダジャレの完成度
+##       "cold_score":      int,    # 寒さ・おやじ度
+##       "scene_score":     int,    # 情景のシュールさ
+##       "addictive_score": int,    # 既出度と余韻
+##       "penalty":         int,    # カテゴリーペナルティ（0 or 50）
+##       "comment":         String  # 判定コメント
 ##   }
 class_name JudgeServiceBase
 
@@ -23,10 +26,13 @@ class_name JudgeServiceBase
 ## だじゃれを判定してスコアを返す。
 ## このクラスでは空のデフォルト値を返す。
 ## 具象クラスでオーバーライドして実際のAI判定を実装すること。
-func judge(_topic: String, _player_dajare: String, _enemy_dajare: String) -> Dictionary:
+func judge(_topic: String, _dajare: String) -> Dictionary:
 	await Engine.get_main_loop().process_frame
 	return {
-		"player_score": 0,
-		"enemy_score": 0,
-		"reason": ""
+		"pun_score": 0,
+		"cold_score": 0,
+		"scene_score": 0,
+		"addictive_score": 0,
+		"penalty": 0,		
+		"comment": ""
 	}

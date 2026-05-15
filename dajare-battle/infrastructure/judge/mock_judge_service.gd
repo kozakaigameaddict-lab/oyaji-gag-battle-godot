@@ -8,11 +8,14 @@ extends JudgeServiceBase
 class_name MockJudgeService
 
 
-## ランダムスコアを返す。0〜100の乱数をプレイヤー・敵それぞれに生成する。
-func judge(_topic: String, _player_dajare: String, _enemy_dajare: String) -> Dictionary:
+## ランダムスコアを返す。各軸に0〜20の乱数、penaltyに0か50を生成する。
+func judge(_topic: String, _dajare: String) -> Dictionary:
 	await Engine.get_main_loop().process_frame
 	return {
-		"player_score": randi_range(0, 100),
-		"enemy_score": randi_range(0, 100),
-		"reason": "モック判定"
+		"pun_score": randi_range(0, 20),
+		"cold_score": randi_range(0, 20),
+		"scene_score": randi_range(0, 20),
+		"addictive_score": randi_range(0, 20),
+		"penalty": randi() % 2 * 50,		
+		"comment": "モック判定"
 	}

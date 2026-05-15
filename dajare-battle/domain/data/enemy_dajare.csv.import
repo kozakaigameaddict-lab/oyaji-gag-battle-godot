@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bdqdrse5yc040"
+
+[deps]
+
+files=["res://domain/data/enemy_dajare.dajare.translation", "res://domain/data/enemy_dajare.pun.translation", "res://domain/data/enemy_dajare.cold.translation", "res://domain/data/enemy_dajare.scene.translation", "res://domain/data/enemy_dajare.addictive.translation", "res://domain/data/enemy_dajare.speed.translation", "res://domain/data/enemy_dajare.penalty.translation"]
+
+source_file="res://domain/data/enemy_dajare.csv"
+dest_files=["res://domain/data/enemy_dajare.dajare.translation", "res://domain/data/enemy_dajare.pun.translation", "res://domain/data/enemy_dajare.cold.translation", "res://domain/data/enemy_dajare.scene.translation", "res://domain/data/enemy_dajare.addictive.translation", "res://domain/data/enemy_dajare.speed.translation", "res://domain/data/enemy_dajare.penalty.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

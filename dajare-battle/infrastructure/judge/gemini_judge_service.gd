@@ -24,7 +24,7 @@ func _init(http_request: HTTPRequest) -> void:
 
 ## だじゃれを判定してスコアを返す。
 ## プロキシにPOSTリクエストを送り、Geminiの判定結果を受け取る。
-func judge(_topic: String, _player_dajare: String, _enemy_dajare: String) -> Dictionary:
+func judge(_topic: String, _dajare: String) -> Dictionary:
 	if _proxy_url.is_empty():
 		DebugLogger.error("proxy_urlが設定されていません", DebugCategories.Category.BATTLE_JUDGE)
 		return {}
@@ -32,8 +32,7 @@ func judge(_topic: String, _player_dajare: String, _enemy_dajare: String) -> Dic
 	# プロキシに送るJSONボディを組み立てる
 	var body: String = JSON.stringify({
 		"topic": _topic,
-		"player_dajare": _player_dajare,
-		"enemy_dajare": _enemy_dajare
+		"dajare": _dajare
 	})
 
 	# POSTリクエストを送信する

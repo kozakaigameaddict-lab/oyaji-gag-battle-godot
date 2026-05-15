@@ -38,12 +38,14 @@ var _current_round: int = 0
 var _player_win_count: int = 0
 var _enemy_win_count: int = 0
 var _player_dajare: String = ""
+var _enemy_dajare_data: EnemyDajareData = null
 var _enemy_dajare: String = ""
 var _player_score: int = 0
 var _enemy_score: int = 0
 var _winner: String = ""
-var _topic: String = "テスト"
-
+var _topic: String = ""
+var _topics: Array[String] =[]
+var _enemy_dajare_repo: EnemyDajareRepository = null
 
 # --- ライフサイクル ---
 
@@ -54,6 +56,9 @@ func _ready() -> void:
 	_current_round = 0
 	_player_win_count = 0
 	_enemy_win_count = 0
+	_enemy_dajare_repo = ServiceLocator.get_service("enemy_dajare_repository")
+	if _enemy_dajare_repo != null:
+		_topics = _enemy_dajare_repo.get_all_topics()
 	_change_state(BattleState.TALK)
 
 
@@ -67,7 +72,8 @@ func initialize() -> void:
 	_enemy_dajare = ""
 	_player_score = 0
 	_enemy_score = 0
-
+	if not _topics.is_empty():
+		_topic = _topics.pick_random() 
 
 # --- プライベートメソッド ---
 
@@ -113,7 +119,17 @@ func _enter_player_presentation() -> void:
 ## ENEMY_PRESENTATIONステートの開始処理。
 func _enter_enemy_presentation() -> void:
 	DebugLogger.debug("ENEMY_PRESENTATIONへ入場した", DebugCategories.Category.BATTLE_PRESENTATION)
-	_enemy_dajare = "ダジャレのサンプル"
+	
+	if _enemy_dajare_repo == null:
+		DebugLogger.error("enemy_dajare_repositoryが登録されていません", DebugCategories.Category.BATTLE_PRESENTATION)
+		return
+	_enemy_dajare_data = _enemy_dajare_repo.get_random_by_topic(_topic)
+	if _enemy_dajare_data == null:
+		_enemy_dajare = "ダジャレのサンプル"
+		_enemy_score = 0
+	else:
+		_enemy_dajare = _enemy_dajare_data.dajare
+		_enemy_score = _enemy_dajare_data.total_score()
 	_enemy_dajare_label.text = _enemy_dajare
 
 
@@ -124,10 +140,9 @@ func _enter_judge() -> void:
 	if judge_service == null:
 		DebugLogger.error("judge_serviceが登録されていません", DebugCategories.Category.BATTLE_JUDGE)
 		return
-	var result: Dictionary = await judge_service.judge(_topic, _player_dajare, _enemy_dajare)
-	_player_score = int(result["player_score"])
+	var result: Dictionary = await judge_service.judge(_topic, _player_dajare)
+	_player_score = int(_calculate_player_score(result))
 	_player_score_label.text = str(_player_score)
-	_enemy_score = int(result["enemy_score"])
 	_enemy_score_label.text = str(_enemy_score)
 	DebugLogger.debug("結果: %s" % str(result), DebugCategories.Category.BATTLE_JUDGE)
 	
@@ -180,3 +195,7 @@ func _resolve_round() -> bool:
 		_winner = "エネミー"
 		return true
 	return false
+
+
+func _calculate_player_score(_result: Dictionary) -> int:
+	return _result["pun_score"] + _result["cold_score"] + _result["scene_score"] + _result["addictive_score"] - _result["penalty"]
