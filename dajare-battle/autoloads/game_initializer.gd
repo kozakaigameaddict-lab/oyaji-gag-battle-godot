@@ -19,3 +19,6 @@ func _ready() -> void:
 	add_child(http_node)
 	# AIジャッジサービス: 開発中はモックを使用。Phase 3でAPIサービスに切り替える。
 	ServiceLocator.register("judge_service", GeminiJudgeService.new(http_node))
+	var repo = EnemyDajareRepository.new()
+	add_child(repo)
+	ServiceLocator.register("enemy_dajare_repository", repo)
