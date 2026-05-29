@@ -15,10 +15,25 @@ extends Node
 ## 起動時にすべてのサービスをServiceLocatorへ登録する。
 func _ready() -> void:
 	# HTTPRequestノードを作り、サービスに渡す
-	var http_node = HTTPRequest.new()
-	add_child(http_node)
+	var http_pun = HTTPRequest.new()
+	add_child(http_pun)
+	var http_cold = HTTPRequest.new()
+	add_child(http_cold)
+	var http_scene = HTTPRequest.new()
+	add_child(http_scene)
+	var http_addictive = HTTPRequest.new()
+	add_child(http_addictive)
+	var http_penalty = HTTPRequest.new()
+	add_child(http_penalty)
+	var http_comment = HTTPRequest.new()
+	add_child(http_comment)
 	# AIジャッジサービス: 開発中はモックを使用。Phase 3でAPIサービスに切り替える。
-	ServiceLocator.register("judge_service", GeminiJudgeService.new(http_node))
+	# AIジャッジ（本番用 - レート制限に注意）
+	# ServiceLocator.register("judge_service", GeminiJudgeService.new(
+	#     http_pun, http_cold, http_scene, http_addictive, http_penalty, http_comment))
+
+	# モック（開発用）
+	ServiceLocator.register("judge_service", MockJudgeService.new())	
 	var repo = EnemyDajareRepository.new()
 	add_child(repo)
 	ServiceLocator.register("enemy_dajare_repository", repo)

@@ -9,3 +9,5 @@ class_name GameConstants
 const MAX_ROUNDS: int = 3
 ## 勝利に必要なラウンド勝利数
 const WINS_REQUIRED: int = 2
+## ペナルティ時に減算されるポイント
+const CATEGORY_PENALTY_AMOUNT: int = 50

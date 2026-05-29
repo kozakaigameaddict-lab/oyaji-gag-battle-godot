@@ -73,7 +73,8 @@ func initialize() -> void:
 	_player_score = 0
 	_enemy_score = 0
 	if not _topics.is_empty():
-		_topic = _topics.pick_random() 
+		# _topic = _topics.pick_random() 
+		_topic = "学校"
 
 # --- プライベートメソッド ---
 
